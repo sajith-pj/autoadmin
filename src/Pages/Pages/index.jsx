@@ -1,5 +1,5 @@
 import Form from "../../components/Form/Form";
-import { sidebarForm } from "../../utils/pageforms/forms";
+import { creatPageForm } from "../../utils/pageforms/forms";
 const Page = () => {
   return (
     <div>
@@ -7,7 +7,7 @@ const Page = () => {
         Create Your Page
       </h1>
       <div className="mt-4">
-        <Form {...sidebarForm} />
+        <Form {...creatPageForm} />
       </div>
     </div>
   );

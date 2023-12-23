@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 import { modal } from "../../components/Modal";
 import CreateForm from "../../components/UiComponents/Form/CreateForm";
+import CreateTable from "../../components/UiComponents/Table";
 
 const handleCustomize = ({
   component,
@@ -11,19 +12,35 @@ const handleCustomize = ({
   modal({
     show: true,
     maxWidth: 450,
-    component: () => (
-      <CreateForm
-        handleChange={handleChange}
-        values={values}
-        setFieldValue={setFieldValue}
-      />
-    ),
+    component: () => {
+      console.log(component); 
+      switch (component) {
+        case "Form":
+          return (
+            <CreateForm
+              handleChange={handleChange}
+              values={values}
+              setFieldValue={setFieldValue}
+            />
+          );
+        case "table":
+          return (
+            <CreateTable
+              handleChange={handleChange}
+              values={values}
+              setFieldValue={setFieldValue}
+            />
+          );
+        default:
+          return;
+      }
+    },
     header: {
       heading: `Create your ${component}`,
     },
   });
 };
-export const sidebarForm = {
+export const creatPageForm = {
   template: [
     {
       container: {
@@ -130,7 +147,6 @@ export const sidebarForm = {
           inputData: [],
         },
         component: ({ values, hanldeChange, setFieldValue, initialValues }) => {
-          console.log(values["inputData"]);
           let components = Array.isArray(values["page-component"])
             ? values["page-component"]
             : [];
@@ -181,10 +197,10 @@ export const sidebarForm = {
       },
     ],
   },
-  // validationSchema: {
-  //   username: Yup.string().required("Please enter the username"), // username is name of input type text
-  //   password: Yup.string().required("Please enter the password"), // password is name of input type  password
-  // },
+  validationSchema: {
+    username: Yup.string().required("Please enter the username"), // username is name of input type text
+    password: Yup.string().required("Please enter the password"), // password is name of input type  password
+  },
   submit: {
     onSubmit: ({ values }) => console.log(values),
   },
