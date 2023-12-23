@@ -5,6 +5,7 @@ import CreatableSelect from "react-select/creatable";
 import ReactSelect from "react-select";
 import Pencil from "../../../assets/icons/Pencil";
 import Trash from "../../../assets/icons/Trash";
+
 const CreateForm = ({ setFieldValue }) => {
   const [databaseOptions, setDatabaseOptions] = useState([]);
   const [formDetails, setFormDetails] = useState({
@@ -148,7 +149,11 @@ const CreateForm = ({ setFieldValue }) => {
       show: true,
       maxWidth: 450,
       component: () => (
-        <CreateField defaultValue={input} addInputs={editInputs} setFieldValue={setFieldValue}/>
+        <CreateField
+          defaultValue={input}
+          addInputs={editInputs}
+          setFieldValue={setFieldValue}
+        />
       ),
       header: {
         heading: `Add Field`,

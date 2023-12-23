@@ -17,6 +17,7 @@ function App() {
         {
           path: "/pages",
           element: <Pages />,
+          
         },
       ],
     },

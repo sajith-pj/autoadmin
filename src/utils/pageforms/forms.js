@@ -23,7 +23,7 @@ const handleCustomize = ({
               setFieldValue={setFieldValue}
             />
           );
-        case "table":
+        case "Table":
           return (
             <CreateTable
               handleChange={handleChange}
