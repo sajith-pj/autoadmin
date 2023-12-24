@@ -13,7 +13,6 @@ const handleCustomize = ({
     show: true,
     maxWidth: 450,
     component: () => {
-      console.log(component); 
       switch (component) {
         case "Form":
           return (
@@ -145,8 +144,12 @@ export const creatPageForm = {
         customInitialValues: {
           "custom-api": [],
           inputData: [],
+          table: {
+            headers: [],
+          },
         },
         component: ({ values, hanldeChange, setFieldValue, initialValues }) => {
+          console.log(values);
           let components = Array.isArray(values["page-component"])
             ? values["page-component"]
             : [];
