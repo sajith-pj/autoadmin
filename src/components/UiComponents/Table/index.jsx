@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { modal } from "../../Modal";
+import { closeModal, modal } from "../../Modal";
 import CreateHeader from "./CreateHeader";
 import CreateRows from "./CreateRows";
 import Table from "../../Table";
@@ -8,14 +8,24 @@ import ReactSelect from "react-select";
 const CreateTable = ({ setFieldValue, values }) => {
   const [loadDataFromApi, setLoadDataFromApi] = useState(false);
   const [tableConfig, setTableConfig] = useState({
-    api: "",
-    method: "",
+    loadFromApi: {
+      api: "",
+      method: "",
+    },
+    match: {
+      header: "",
+      dataKey: "",
+    },
   });
-  const [headers, setHeaders] = useState([]);
-  const [rows, setRows] = useState([]);
+  const [headers, setHeaders] = useState(values.table.headers || []);
+  const [rows, setRows] = useState(values.table.rows || []);
   const [errors, setErrors] = useState({
     headerError: "",
     rowsError: "",
+    loadFromApi: {
+      method: "",
+      api: "",
+    },
   });
   let methodOptions = [
     {
@@ -47,11 +57,7 @@ const CreateTable = ({ setFieldValue, values }) => {
       value: "OPTIONS",
     },
   ];
-  const handleSelectInput = ({ value }) =>
-    setTableConfig({ ...tableConfig, [name]: value.label });
-  const handleChange = (event) => {
-    setTableConfig({ ...tableConfig, [event.target.name]: event.target.value });
-  };
+
   const addHeaders = (headers) => {
     setHeaders(headers);
     setErrors({ ...errors, headerError: "" });
@@ -60,6 +66,12 @@ const CreateTable = ({ setFieldValue, values }) => {
     setRows([...rows, tableRows]);
     setErrors({ ...errors, rowsError: "" });
   };
+
+  const getHeaderOptions = headers.map((header) => ({
+    label: header,
+    value: header,
+  }));
+
   const createHeader = () => {
     modal({
       maxWidth: 450,
@@ -94,16 +106,20 @@ const CreateTable = ({ setFieldValue, values }) => {
     }
     return true;
   };
+
   const saveTable = () => {
     const isValid = validateForm();
     if (!isValid) return;
-    setFieldValue("table", { ...values.table, headers, rows });
+    if (!loadDataFromApi)
+      setFieldValue("table", { ...values.table, headers, rows });
+    else setFieldValue("table", {});
+    closeModal();
   };
   return (
     <div>
       <div>
-        {Object.keys(errors).map((error, index) => {
-          if (errors[error] !== "") {
+        {[errors.rowsError, errors.headerError].map((error, index) => {
+          if (error !== "") {
             return (
               <div
                 key={index}
@@ -136,26 +152,24 @@ const CreateTable = ({ setFieldValue, values }) => {
             Load the data from API
           </label>
         </div>
-        {!loadDataFromApi && (
-          <div>
-            {headers.length > 0 && (
-              <button
-                type="button"
-                className="bg-primary text-white px-4 py-2 rounded-md text-sm"
-                onClick={createRows}
-              >
-                Add Rows
-              </button>
-            )}
+        <div>
+          {!loadDataFromApi && headers.length > 0 && (
             <button
               type="button"
-              className="bg-primary text-white px-4 py-2 rounded-md text-sm ml-4"
-              onClick={createHeader}
+              className="bg-primary text-white px-4 py-2 rounded-md text-sm"
+              onClick={createRows}
             >
-              Add Headers
+              Add Rows
             </button>
-          </div>
-        )}
+          )}
+          <button
+            type="button"
+            className="bg-primary text-white px-4 py-2 rounded-md text-sm ml-4"
+            onClick={createHeader}
+          >
+            Add Headers
+          </button>
+        </div>
       </div>
       <div className="w-full overflow-auto my-5">
         {loadDataFromApi ? (
@@ -164,27 +178,106 @@ const CreateTable = ({ setFieldValue, values }) => {
               <label className="label">API </label>
               <input
                 type="text"
-                name="customApi"
+                name="api"
                 className="input"
-                onChange={handleChange}
-                value={tableConfig.api}
+                onChange={(event) =>
+                  setTableConfig({
+                    ...tableConfig,
+                    loadFromApi: {
+                      ...tableConfig.loadFromApi,
+                      api: event.target.value,
+                    },
+                  })
+                }
+                value={tableConfig.loadFromApi.api}
               />
               <p className="error">
-                {errors.customApi !== "" && errors.customApi}
+                {errors.loadFromApi.api !== "" && errors.loadFromApi.api}
               </p>
             </div>
-            <div className="input-container">
+            <div className="input-container relative z-10">
               <label className="label">Method</label>
               <ReactSelect
-                name="customApiMethod"
+                name="method"
                 onChange={(value) =>
-                  handleSelectInput({ ...value, name: "customApiMethod" })
+                  setTableConfig({
+                    ...tableConfig,
+                    loadFromApi: {
+                      ...tableConfig.loadFromApi,
+                      method: value.label,
+                    },
+                  })
                 }
                 value={{
-                  label: tableConfig.api,
-                  value: tableConfig.api,
+                  label: tableConfig.loadFromApi.method,
+                  value: tableConfig.loadFromApi.method,
                 }}
                 options={methodOptions}
+                menuPortalTarget={document.body}
+                styles={{
+                  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                }}
+              />
+              <p className="error">
+                {errors.customApiMethod !== "" && errors.customApiMethod}
+              </p>
+            </div>
+            <div className="col-span-2">
+              <div>Map the headers and data</div>
+              <div className="text-xs">
+                Help us to match the data and header
+              </div>
+            </div>
+
+            <div className="input-container relative z-10">
+              <label className="label">Header</label>
+              <ReactSelect
+                name="header"
+                onChange={(value) =>
+                  setTableConfig({
+                    ...tableConfig,
+                    match: {
+                      ...tableConfig.match,
+                      header: value.label,
+                    },
+                  })
+                }
+                value={{
+                  label: tableConfig.match.header,
+                  value: tableConfig.match.header,
+                }}
+                options={getHeaderOptions}
+                menuPortalTarget={document.body}
+                styles={{
+                  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                }}
+              />
+              <p className="error">
+                {errors.customApiMethod !== "" && errors.customApiMethod}
+              </p>
+            </div>
+            <div className="input-container relative z-10">
+              <label className="label">Data Key</label>
+              <ReactSelect
+                name="key"
+                onChange={(value) =>
+                  setTableConfig({
+                    ...tableConfig,
+                    match: {
+                      ...tableConfig.match,
+                      dataKey: value.label,
+                    },
+                  })
+                }
+                value={{
+                  label: tableConfig.match.dataKey,
+                  value: tableConfig.match.dataKey,
+                }}
+                options={methodOptions}
+                menuPortalTarget={document.body}
+                styles={{
+                  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                }}
               />
               <p className="error">
                 {errors.customApiMethod !== "" && errors.customApiMethod}

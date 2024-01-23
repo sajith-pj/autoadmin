@@ -1,13 +1,8 @@
-
 import cn from "classnames";
 import Styles from "../form.module.scss";
 import classNames from "classnames";
 import propTypes from "prop-types";
-import {
-  templateInputDefaultProps,
-  templateInputProps,
-} from "../props/InputProps";
-const Date = ({ templateInput, errors, handleChange, values, touched }) => {
+const File = ({ templateInput, errors, handleChange, values, touched }) => {
   const { container, input, label } = templateInput;
 
   return (
@@ -23,6 +18,7 @@ const Date = ({ templateInput, errors, handleChange, values, touched }) => {
           className={cn(
             label.className !== "" ? label.className : Styles["label"]
           )}
+          htmlFor={input.id}
         >
           <span>
             {typeof label.text == "function"
@@ -59,7 +55,16 @@ const Date = ({ templateInput, errors, handleChange, values, touched }) => {
           values[`${input?.name}`] !== undefined ? values[`${input?.name}`] : ""
         }
       />
-
+      {label?.text !== "" && label?.text !== undefined && (
+        <label
+          className={cn(
+            label.className !== "" ? label.className : Styles["label"]
+          )}
+          htmlFor={input.id}
+        >
+          <span>{input?.placeholder}</span>
+        </label>
+      )}
       {touched[`${input?.name}`] &&
         errors !== undefined &&
         errors[`${input?.name}`] && (
@@ -71,21 +76,5 @@ const Date = ({ templateInput, errors, handleChange, values, touched }) => {
   );
 };
 
-Date.propTypes = propTypes.shape({
-  templateInput: templateInputProps,
-  handleChange: propTypes.func.isRequired,
-  errors: propTypes.object,
-  values: propTypes.object,
-  touched: propTypes.object,
-});
-
-Date.defaultProps = {
-  templateInput: templateInputDefaultProps,
-  handleChange: () => {},
-  errors: {},
-  values: {},
-  touched: {},
-};
-
-Date.displayName = "Date";
-export default Date;
+Date.displayName = "File";
+export default File;

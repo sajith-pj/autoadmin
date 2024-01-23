@@ -11,7 +11,7 @@ let createFieldForm = {
       },
       input: {
         type: "text",
-        name: "label",
+        name: "label-text",
         placeholder: "Input Label Name",
         className: "",
       },
@@ -192,18 +192,18 @@ let createFieldForm = {
           <div className="input-container mr-4">
             <input
               type="checkbox"
-              name="input-validation-isrequired"
-              id="input-validation-isrequired"
+              name="input-validation-required"
+              id="input-validation-required"
               className="input"
               onChange={handleChange}
               checked={
-                values["input-validation-isrequired"]
-                  ? values["input-validation-isrequired"][0]
+                values["input-validation-required"]
+                  ? values["input-validation-required"][0]
                   : false
               }
               data-fr
             />
-            <label className="label" htmlFor="input-validation-isrequired">
+            <label className="label" htmlFor="input-validation-required">
               Required
             </label>
           </div>
@@ -385,7 +385,7 @@ let createFieldForm = {
     ],
   },
   validationSchema: {
-    label: Yup.string().required("Please enter the label for the input"),
+    "label-text": Yup.string().required("Please enter the label for the input"),
     "input-type": Yup.string().required("Please select the type for the input"),
     "input-name": Yup.string().required("Please enter the name for the input"),
     "input-id": Yup.string().required("Please enter the id for the input"),

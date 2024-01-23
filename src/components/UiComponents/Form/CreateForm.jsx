@@ -136,10 +136,62 @@ const CreateForm = ({ setFieldValue }) => {
     }
     return true;
   };
+
+  const generateFormObject = () => {
+    const getAcceptCodes = (value) => {
+      switch (value) {
+        case "All":
+          return "All";
+        case "only_alphabets":
+          return "A";
+        case "only_numbers":
+          return "N";
+        case "alphabets_numbers":
+          return "A&N";
+        default:
+          return "";
+      }
+    };
+    return formDetails.inputs.reduce(
+      (formConfig, input) => {
+        let inputObj = {
+          input: {},
+          label: {},
+          container: { className: "mb-4" },
+        };
+        let validationSchema = {};
+        Object.keys(input).forEach((key) => {
+          if (
+            key.split("-")[1] &&
+            key.split("-")[0] !== "label" &&
+            key.split("-")[1] !== "validation"
+          ) {
+            inputObj.input[key.split("-")[1]] = input[key];
+          } else if (key.split("-")[0] && key.split("-")[0] === "label") {
+            console.log(key.split("-")[1]);
+            inputObj.label[key.split("-")[1]] = input[key];
+          } else {
+            validationSchema[key.split("-")[2]] = Array.isArray(input[key])
+              ? input[key].length > 0
+                ? true
+                : false
+              : key == "input-validation-accept"
+              ? getAcceptCodes(input[key])
+              : input[key];
+          }
+        });
+        formConfig.template.push(inputObj);
+        formConfig.validationSchema = validationSchema;
+        console.log(formConfig);
+        return formConfig;
+      },
+      { template: [], validationSchema: {} }
+    );
+  };
   const saveData = () => {
     const isValid = validateForm();
     if (!isValid) return;
-    setFieldValue("formDetails", formDetails);
+    setFieldValue("form", generateFormObject());
     closeModal();
   };
 
@@ -232,7 +284,7 @@ const CreateForm = ({ setFieldValue }) => {
           key={key}
           className="w-full border border-slate-300 px-4 py-2 rounded-md mb-4 flex justify-between items-center"
         >
-          {input.label}
+          {input["label-text"]}
           <div>
             <button
               type="button"

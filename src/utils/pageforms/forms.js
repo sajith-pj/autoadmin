@@ -111,7 +111,7 @@ export const creatPageForm = {
       },
       input: {
         type: "select",
-        name: "page-component",
+        name: "page-components",
         placeholder: "Page Sub Title",
         className: "",
         multiple: true,
@@ -143,15 +143,15 @@ export const creatPageForm = {
       render: {
         customInitialValues: {
           "custom-api": [],
-          inputData: [],
+          form: [],
           table: {
             headers: [],
           },
         },
         component: ({ values, hanldeChange, setFieldValue, initialValues }) => {
           console.log(values);
-          let components = Array.isArray(values["page-component"])
-            ? values["page-component"]
+          let components = Array.isArray(values["page-components"])
+            ? values["page-components"]
             : [];
           if (components.length > 0) {
             return (
@@ -195,16 +195,52 @@ export const creatPageForm = {
         type: "submit",
         name: "submit",
         id: "submit",
-        displayText: "Sign In", // innerText of button
-        className: "", // className for button
+        displayText: "Create Page",
+        className: "bg-primary text-white px-4 py-2 rounded-lg mr-4",
       },
     ],
   },
   validationSchema: {
-    username: Yup.string().required("Please enter the username"), // username is name of input type text
-    password: Yup.string().required("Please enter the password"), // password is name of input type  password
+    "sidebar-name": Yup.string().required("Please enter the sidebar name"),
+    "sidebar-path": Yup.string().required("Please enter the sidebar path"),
+    "page-title": Yup.string().required("Please enter the page title"),
+    "page-sub-title": Yup.string().required("Please enter the page sub title"),
+    "page-components": Yup.array()
+      .of(
+        Yup.object().shape({
+          value: Yup.string().required("Please select an option"), // Adjust validation rules as needed
+          label: Yup.string().required("Please select an option"), // Adjust validation rules as needed
+        })
+      )
+      .min(1, "Please select at least one option"),
   },
   submit: {
-    onSubmit: ({ values }) => console.log(values),
+    api: "/pages",
+    method: "POST",
+    body: ({ values }) => {
+      let body = {};
+
+      Object.keys(values).forEach((key) => {
+        if (!["table", "form"].includes(key)) body[key] = values[key];
+      });
+      body["page-components"] = values["page-components"].reduce(
+        (acc, current) => {
+          if (
+            current.value === "form" &&
+            values[current.value].template.length > 0
+          ) {
+            acc[current.value] = values[current.value];
+          } else if (
+            current.value === "table" &&
+            values[current.value].rows.length > 0
+          ) {
+            acc[current.value] = values[current.value];
+          } else acc[current.value] = values[current.value];
+          return acc;
+        },
+        {}
+      );
+      return body;
+    },
   },
 };

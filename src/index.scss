@@ -99,6 +99,15 @@
         transform: rotate(45deg);
       }
     }
+
+    &[type="file"] {
+      padding: 0;
+      height: 0;
+      width: 0;
+      margin-bottom: 0;
+      display: none;
+      cursor: pointer;
+    }
     // ===/CHECKBOX===
 
     // ===RADIO===
