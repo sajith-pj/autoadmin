@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "Fira Sans", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .input-container {
@@ -190,4 +190,9 @@
 .table tr th,
 .table tr td {
   border-bottom: 1px solid #66ce6973;
+}
+.regform{
+-webkit-box-shadow: 10px 10px 38px 0px rgba(84, 108, 227, 1);
+  -moz-box-shadow: 10px 10px 38px 0px rgba(84, 108, 227, 1);
+  box-shadow: 10px 10px 38px 0px rgba(84, 108, 227, 1);
 }

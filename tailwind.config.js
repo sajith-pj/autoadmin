@@ -4,15 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        "hover-color": "#79b59a",
-        primary: "#4361EE",
-        white: "#fff",
-        green: "#99A98F",
-        gray: "#808080",
-        "light-gray": "#EFECEB",
+        primary: "#5D5FEF",
+        text_color: "#05004E",
+        sub_text: "#737791",
+        secondary_btn: "#EDEDED",
+        primary_btn: "#5D5FEF",
+        secondary_text: "#000000",
       },
       fontFamily: {
-        oswald: ["Oswald"],
+        Poppins: ["Poppins"],
       },
     },
   },
