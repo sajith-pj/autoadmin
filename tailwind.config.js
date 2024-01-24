@@ -10,6 +10,8 @@ export default {
         secondary_btn: "#EDEDED",
         primary_btn: "#5D5FEF",
         secondary_text: "#000000",
+        secondary_bg: "#FAFBFC",
+        border_color: "#737791",
       },
       fontFamily: {
         Poppins: ["Poppins"],

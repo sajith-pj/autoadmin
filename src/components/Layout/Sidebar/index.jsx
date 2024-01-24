@@ -1,17 +1,28 @@
 import { useNavigate } from "react-router-dom";
+import Dashboard from "../../../assets/icons/Dashboard";
+import Settings from "../../../assets/icons/Settings";
+import Pages from "../../../assets/icons/Pages";
+import DummyLogo from "../../../assets/icons/DummyLogo";
+
+
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const items = [
     {
-      icon: "",
+      icon: <Dashboard />,
       title: "Dashboard",
       link: "/",
     },
     {
-      icon: "",
+      icon: <Pages />,
       title: "Pages",
       link: "/pages",
+    },
+    {
+      icon: <Settings />,
+      title: "Settings",
+      link: "/settings",
     },
   ];
   const navigateToHref = (link) => {
@@ -23,7 +34,8 @@ const Sidebar = () => {
       style={{ backgroundColor: "white" }}
     >
       {/* <img src="/sigi.png" alt="LOGO" className="w-[130px]" /> */}
-      <div className="flex justify-center items-center h-[65px]">
+      <div className="flex gap-3 justify-center items-center h-[65px] ">
+      <DummyLogo  width={35} height={35}/>
         <p className="font-bold ">
           AUTO <span className="text-primary">ADMIN</span>
         </p>
@@ -36,10 +48,10 @@ const Sidebar = () => {
               <button
                 type="button"
                 onClick={() => navigateToHref(data.link)}
-                className={`w-full flex justify-start items-center px-6 py-2 rounded-[7px] hover:shadow-sm text-primary ${
+                className={` w-full flex justify-start items-center px-6 py-2 rounded-[7px] hover:shadow-sm text-primary ${
                   window.location.pathname == data.link
-                    ? "bg-primary text-white shadow-sm"
-                    : "hover:bg-primary hover:bg-opacity-10"
+                    ? "bg-primary text-white shadow-sm fill-white"
+                    : "hover:bg-primary hover:bg-opacity-10 fill-border_color"
                 } `}
               >
                 {data.icon}

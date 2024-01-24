@@ -1,5 +1,6 @@
 import { modal } from "../Modal";
 import CreatePanelModal from "./CreatePanelModal";
+import CreateIcon from "../../assets/images/create.png";
 
 const CreatePanel = () => {
   const createPanel = () => {
@@ -15,10 +16,10 @@ const CreatePanel = () => {
     <div>
       <button
         type="button"
-        className="bg-primary text-white px-4 py-2 rounded-lg mr-4 "
+        className=" "
         onClick={createPanel}
       >
-        Create
+      <img src={CreateIcon} alt="create icon " className="w-[60px] h-[60px] "/>
       </button>
     </div>
   );

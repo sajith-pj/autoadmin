@@ -9,8 +9,8 @@ const Layout = () => {
       <Sidebar />
       <div className="w-full h-full overflow-hidden">
         <Topbar />
-        <div className="p-8 w-full h-[91%] overflow-auto ">
-          <Outlet />
+        <div className="p-8 w-full h-[91%] overflow-auto bg-secondary_bg">
+          <Outlet  />
         </div>
       </div>
     </div>
