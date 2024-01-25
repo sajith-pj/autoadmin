@@ -7,7 +7,7 @@ import { config } from "./components/Form/Form";
 import axiosConfig from "./config/axios";
 import ClientLayout from "./components/ClientLayout";
 import ClientPage from "./Pages/ClientPanel/ClientPage";
-import Register from "./Pages/Register";
+import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -15,12 +15,12 @@ config(axiosConfig);
 function App() {
   const router = createBrowserRouter([
     {
-    path:"/register",
-    element:<Register />
+      path: "/signup",
+      element: <Register />,
     },
     {
-    path:"/login",
-    element:<Login />
+      path: "/signin",
+      element: <Login />,
     },
     {
       path: "/",
@@ -49,9 +49,9 @@ function App() {
   ]);
   return (
     <GoogleOAuthProvider clientId="858610154745-pvoetcmoqcsu81opumtj2l0cn9mt3n7m.apps.googleusercontent.com">
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </GoogleOAuthProvider>
-  ); 
+  );
 }
 
 export default App;

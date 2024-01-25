@@ -4,6 +4,7 @@ let RegisterForm = {
     className: "",
     exclude: [],
   },
+  
   template: [
     {
       container: {

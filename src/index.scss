@@ -3,8 +3,41 @@
 @tailwind utilities;
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
+
+// container
+.custom-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 90%;
+}
+@media (min-width: 576px) {
+  .custom-container {
+    max-width: 470px;
+  }
+}
+@media (min-width: 768px) {
+  .custom-container {
+    max-width: 668px;
+  }
+}
+@media (min-width: 992px) {
+  .custom-container {
+    max-width: 892px;
+  }
+}
+@media (min-width: 1200px) {
+  .custom-container {
+    max-width: 1100px;
+  }
+}
+@media (min-width: 1400px) {
+  .custom-container {
+    max-width: 1200px;
+  }
+}
+// container
 
 .input-container {
   font-size: 0.75rem; /* 12px */
@@ -190,9 +223,4 @@
 .table tr th,
 .table tr td {
   border-bottom: 1px solid #66ce6973;
-}
-.regform{
--webkit-box-shadow: 10px 10px 38px 0px rgba(84, 108, 227, 1);
-  -moz-box-shadow: 10px 10px 38px 0px rgba(84, 108, 227, 1);
-  box-shadow: 10px 10px 38px 0px rgba(84, 108, 227, 1);
 }

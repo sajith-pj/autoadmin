@@ -39,6 +39,7 @@ const handleCustomize = ({
     },
   });
 };
+
 export const creatPageForm = {
   template: [
     {

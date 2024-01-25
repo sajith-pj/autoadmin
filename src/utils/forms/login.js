@@ -47,7 +47,7 @@ let loginForm = {
       {
         type: "submit",
         name: "submit",
-        displayText: "Create Account",
+        displayText: "Sign In",
         className:
           "bg-white text-primary  py-[10px] rounded-md w-full hover:bg-hover-color my-[10px] text-sm font-Poppins font-bold",
       },
