@@ -13,27 +13,6 @@ const File = ({ templateInput, errors, handleChange, values, touched }) => {
           : Styles["input-container"]
       )}
     >
-      {label?.text !== "" && label?.text !== undefined && (
-        <label
-          className={cn(
-            label.className !== "" ? label.className : Styles["label"]
-          )}
-          htmlFor={input.id}
-        >
-          <span>
-            {typeof label.text == "function"
-              ? label.text({
-                  input: {
-                    ...templateInput,
-                    value: values[input.name],
-                    error: errors[input.name],
-                    ...label,
-                  },
-                })
-              : label.text}
-          </span>
-        </label>
-      )}
       <input
         {...input}
         className={cn(
@@ -59,6 +38,31 @@ const File = ({ templateInput, errors, handleChange, values, touched }) => {
         <label
           className={cn(
             label.className !== "" ? label.className : Styles["label"]
+          )}
+          htmlFor={input.id}
+        >
+          <span>
+            {typeof label.text == "function"
+              ? label.text({
+                  input: {
+                    ...templateInput,
+                    value: values[input.name],
+                    error: errors[input.name],
+                    ...label,
+                  },
+                })
+              : label.text}
+          </span>
+        </label>
+      )}
+      {label?.text !== "" && label?.text !== undefined && (
+        <label
+          className={cn(
+            input?.className
+              ? input?.className !== ""
+                ? input?.className
+                : Styles["input"]
+              : Styles["input"], "label-input"
           )}
           htmlFor={input.id}
         >

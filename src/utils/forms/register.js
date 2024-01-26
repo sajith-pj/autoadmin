@@ -4,7 +4,7 @@ let RegisterForm = {
     className: "",
     exclude: [],
   },
-  
+
   template: [
     {
       container: {
@@ -17,8 +17,7 @@ let RegisterForm = {
       input: {
         type: "text",
         name: "name",
-        placeholder: "enter the name",
-        
+        placeholder: "Enter the name",
       },
     },
     {
@@ -32,7 +31,7 @@ let RegisterForm = {
       input: {
         type: "email",
         name: "email",
-        placeholder: "enter your email address",
+        placeholder: "Enter your email address",
       },
     },
     {
@@ -45,8 +44,8 @@ let RegisterForm = {
       },
       input: {
         type: "text",
-        name: "phonenumber",
-        placeholder: "enter your phoneNumber",
+        name: "phoneNumber",
+        placeholder: "Enter your phoneNumber",
       },
     },
     {
@@ -60,7 +59,7 @@ let RegisterForm = {
       input: {
         type: "password",
         name: "password",
-        placeholder: "enter your password",
+        placeholder: "Enter your password",
       },
     },
     {
@@ -73,17 +72,17 @@ let RegisterForm = {
       },
       input: {
         type: "password",
-        name: "confirmpassword",
-        placeholder: "re-enter your password",
+        name: "confirmPassword",
+        placeholder: "Re-enter your password",
       },
     },
   ],
   validationSchema: {
-    name: Yup.string().required("please enter the name"),
-    email: Yup.string().required("please enter your email address"),
-    phonenumber: Yup.string().required("please enter the phonenumber"),
-    password: Yup.string().required("please enter the password"),
-    confirmpassword: Yup.string()
+    name: Yup.string().required("please Enter the name"),
+    email: Yup.string().required("please Enter your email address"),
+    phoneNumber: Yup.string().required("please Enter the phonenumber"),
+    password: Yup.string().required("please Enter the password"),
+    confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
   },
@@ -96,28 +95,15 @@ let RegisterForm = {
         className:
           "bg-white text-primary  py-[10px] rounded-md w-full hover:bg-hover-color my-[10px] text-sm font-Poppins font-bold",
       },
-      
     ],
   },
 
   submit: {
-    api: "",
-    method: "post",
-    body: ({ values }) => {
-      return {
-        email: values.email,
-        first_name: values.first_name,
-        last_name: values.last_name,
-        mobile_number: values.mobile_number,
-        referred_by: values.referred_by,
-        department: values.department,
-        dealer_id: values.dealer_id,
-        username: values.username,
-        password: values.password,
-      };
-    },
-    onAfterApiSuccess: (res) => {
-      window.location.href = "/dashboard";
+    api: "/auth/signup",
+    method: "POST",
+    body: ["name", "email", "password", "phoneNumber", "confirmPassword"],
+    onAfterApiSuccess: () => {
+      window.location.href = "/singin";
     },
   },
 };

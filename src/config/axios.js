@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((config) => {
-  config.baseURL = `http://localhost:3000`;
+  config.baseURL = `https://autoadmin.onrender.com/`;
   config.headers = Object.assign(
     {
       Authorization: `${localStorage.getItem("accessToken")}`,

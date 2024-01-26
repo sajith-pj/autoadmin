@@ -3,75 +3,60 @@ let createPanelForm = {
   template: [
     {
       container: {
-        className: "",
+        className: "input-container white-bg",
       },
       label: {
         text: "Name",
-        className: "",
+        className: "label",
       },
       input: {
         type: "text",
-        name: "panel-name",
+        name: "panelName",
         placeholder: "Panel Name",
-        className: "",
+        className: "input",
       },
     },
     {
       container: {
-        className: "",
+        className: "input-container white-bg ",
       },
       label: {
-        text: "Choose your logo",
-        className: "",
+        text: "Logo",
+        className: "file-label",
       },
       input: {
         type: "file",
-        name: "panel-logo",
+        name: "panelName",
         id: "panel-logo",
-        className: "",
-      },
-    },
-    {
-      container: {
-        className: "",
-      },
-      label: {
-        text: "Input Name",
-        className: "",
-      },
-      input: {
-        type: "text",
-        name: "input-name",
-        placeholder: "Enter input name",
-        className: "",
+        className: "input",
+        placeholder: "Choose youur logo",
       },
     },
   ],
   buttons: {
-    containerClassName: "center",
+    containerClassName: "flex justify-end mt-[32px]",
     items: [
-      {
-        type: "submit",
-        name: "submit",
-        id: "submit",
-        displayText: "Create Panel", // innerText of button
-        className: "bg-primary text-white px-4 py-2 rounded-lg mr-4", // className for button
-      },
       {
         type: "button",
         name: "cancel",
         id: "cancel",
         displayText: "Cancel",
-        className: "bg-slate-400 text-white px-4 py-2 rounded-lg", // className for button
+        className:
+          "bg-secondary_btn text-secondary_text/[0.57] border border-border_color/[0.1] font-medium px-4 py-2 rounded-lg mr-4 text-[14px]", // className for button
         "data-modal-close": true,
+      },
+      {
+        type: "submit",
+        name: "submit",
+        id: "submit",
+        displayText: "Create", // innerText of button
+        className: "bg-primary text-white px-4 py-2 rounded-lg text-[14px]",
       },
     ],
   },
   validationSchema: {
-    "panel-name": Yup.string().required("Please enter the label for the input"),
-    "panel-logo": Yup.string().required("Please select the type for the input"),
-    "input-name": Yup.string().required("Please enter the name for the input"),
-    "input-id": Yup.string().required("Please enter the id for the input"),
+    panelName: Yup.string().required("Please enter the label for the input"),
+    panelLogo: Yup.string().required("Please select the type for the input"),
   },
 };
 export { createPanelForm };
