@@ -15,7 +15,8 @@ import ClientPage from "./Pages/ClientPanel/ClientPage";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import "./assets/css/table.scss";
+import "./assets/css/table.scss"
+import CreateSection from "./Pages/CreateNewSection";
 
 config(axiosConfig);
 function App() {
@@ -40,8 +41,13 @@ function App() {
           path: "/pages",
           element: <Pages />,
         },
+        {
+          path: "/pages/new",
+          element: <CreateSection />,
+        },
       ],
     },
+
     {
       path: "/client",
       element: <ClientLayout />,
