@@ -3,20 +3,32 @@ import Form from "../../components/Form/Form";
 import { loginForm } from "../../utils/forms/login";
 import Google from "../../assets/icons/Google";
 import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { post } from "../../config";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      const userInfo = await axios
-        .get("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        })
-        .then((res) => res.data);
-
-      console.log(userInfo);
+      post("/auth/google", {
+        googletoken: tokenResponse.access_token,
+        tokentype: tokenResponse.token_type,
+      }).then((response) => {
+        localStorage.setItem("token", response.data.token);
+        toast("LoggedIn Successfully", {
+          type: "success",
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          onClose: () => (window.location.href = "/"),
+        });
+      });
     },
   });
 

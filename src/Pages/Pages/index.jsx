@@ -116,7 +116,6 @@ const Page = () => {
           </button>
         </div>
       </div>
-
       <div>
         <DataTable
           columnDef={{ tableHeaders: headers }}

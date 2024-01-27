@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 let loginForm = {
@@ -34,6 +35,15 @@ let loginForm = {
         name: "password",
         placeholder: "enter your password",
       },
+    },
+    {
+      render: () => (
+        <div className="flex justify-end">
+          <Link to="/forgot-password" className="text-white">
+            Forgot Password
+          </Link>
+        </div>
+      ),
     },
   ],
   validationSchema: {

@@ -1,0 +1,25 @@
+.layout-container {
+  position: fixed;
+  max-width: 450px;
+  width: 100%;
+  min-height: 300px;
+  z-index: 51;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+
+  .layout-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 20px;
+    min-height: 300px;
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+}
