@@ -2,19 +2,11 @@ const Trash = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="feather feather-trash"
+      viewBox="0 0 19 31"
+      fill="inherit"
       {...props}
     >
-      <polyline points="3 6 5 6 21 6"></polyline>
-      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      <path d="M19 1.71307H14.25L12.8929 0H6.10714L4.75 1.71307H0V5.13921H19M1.35714 27.4091C1.35714 28.3178 1.64311 29.1892 2.15214 29.8317C2.66117 30.4743 3.35155 30.8352 4.07143 30.8352H14.9286C15.6484 30.8352 16.3388 30.4743 16.8479 29.8317C17.3569 29.1892 17.6429 28.3178 17.6429 27.4091V6.85228H1.35714V27.4091Z" />
     </svg>
   );
 };

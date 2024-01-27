@@ -1,14 +1,14 @@
-import DownArrow from "../../../assets/icons/DownArrow";
+import DownArrow from "../../../assets/icons/ChevronArrow";
 import MenuIcon from "../../../assets/icons/MenuIcon";
 import Notification from "../../../assets/icons/Notification";
 import ProfileImage from "../../../assets/images/Rectangle 1393.png";
 
-const Topbar = () => {
+const Topbar = ({ cycleOpen }) => {
   return (
     <div className="shadow-sm border-b-[1px] border-primary  border-opacity-10">
       <div className="w-full  flex justify-between items-center gap-4 p-4">
         <div>
-          <button type="button">
+          <button type="button" onClick={cycleOpen}>
             <MenuIcon width="25" className="fill-primary stroke-primary" />
           </button>
         </div>

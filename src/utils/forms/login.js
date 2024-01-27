@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 let loginForm = {
   inputContainer: {
@@ -55,8 +56,20 @@ let loginForm = {
     api: "/auth/signin",
     method: "post",
     body: ["email", "password"],
-    onAfterApiSuccess: () => {
-      window.location.href = "/dashboard";
+    onAfterApiSuccess: (response) => {
+      localStorage.setItem("token", response.data.token);
+      toast("LoggedIn Successfully", {
+        type: "success",
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        onClose: () => (window.location.href = "/"),
+      });
     },
   },
 };

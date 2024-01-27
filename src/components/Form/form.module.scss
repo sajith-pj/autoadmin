@@ -11,13 +11,13 @@
     width: 100%;
     margin-top: 0.25rem;
     display: block;
-    border-radius:4px; /* 6px */
+    border-radius: 4px; /* 6px */
     border: 1px solid rgb(255, 255, 255);
     background: transparent;
     padding: 0.7rem 1rem;
     font-size: 0.75rem; /* 12px */
     line-height: 1rem;
-
+    color: white;
     &:focus {
       outline: none;
     }
@@ -39,7 +39,7 @@
     //=== DISABLED INPUT=====
 
     &::placeholder {
-      color: rgba(255,255,255,0.53);
+      color: rgba(255, 255, 255, 0.53);
     }
 
     // ===CHECKBOX===
@@ -198,7 +198,6 @@
   .input-container {
     font-size: 0.875rem; /* 14px */
     line-height: 1.25rem; /* 20px */
-    
   }
 }
 // TEXT INPUTS
@@ -211,7 +210,6 @@
   background: rgb(23, 74, 132);
   border-radius: 7px;
   color: #fff;
- 
 
   &:disabled {
     opacity: 0.7;
