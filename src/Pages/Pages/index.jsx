@@ -8,7 +8,9 @@ import PlayIcon from "../../assets/icons/PlayIcon";
 import { modal } from "../../components/Modal";
 import NewPageModal from "../../components/UiComponents/Pages/NewPageModal";
 
+
 const Page = () => {
+
   let headers = [
     {
       Header: "No",
@@ -101,17 +103,18 @@ const Page = () => {
       path: "/add-products",
     },
   ];
-
+  
   const createNewPage = ()=>{
   modal({header:{
   heading:"CREATE NEW PAGE"
   },
   component:<NewPageModal />
   
-  
   })
-
+ 
     }
+
+
   return (
     <div>
       <div className="flex justify-between items-end">
