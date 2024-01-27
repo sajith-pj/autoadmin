@@ -4,8 +4,10 @@ import { loginForm } from "../../utils/forms/login";
 import Google from "../../assets/icons/Google";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const userInfo = await axios
@@ -28,7 +30,10 @@ const Login = () => {
             <h1 className="text-white text-[23px] pb-3">Login</h1>
             <Form {...loginForm} />
             <div>
-              <button className="text-white border border-white p-[6px] justify-center w-full rounded-md text-[13px] font-semibold mb-2">
+              <button
+                className="text-white border border-white p-[6px] justify-center w-full rounded-md text-[13px] font-semibold mb-2"
+                onClick={() => navigate("/signup")}
+              >
                 Create Account
               </button>
             </div>

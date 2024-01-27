@@ -1,6 +1,4 @@
-import React from 'react'
-
-const DownArrow = (props) => {
+const ChevronArrow = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,12 +11,12 @@ const DownArrow = (props) => {
       <path
         d="M4 6L8 10L12 6"
         stroke="#151D48"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
-}
+};
 
-export default DownArrow
+export default ChevronArrow;

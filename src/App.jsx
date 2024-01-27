@@ -1,5 +1,9 @@
 import "./App.css";
 import "./assets/css/inputs.scss";
+import "./assets/css/table.scss";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./Pages/Dashboard";
@@ -51,6 +55,7 @@ function App() {
   ]);
   return (
     <GoogleOAuthProvider clientId="858610154745-pvoetcmoqcsu81opumtj2l0cn9mt3n7m.apps.googleusercontent.com">
+      <ToastContainer />
       <RouterProvider router={router} />
     </GoogleOAuthProvider>
   );

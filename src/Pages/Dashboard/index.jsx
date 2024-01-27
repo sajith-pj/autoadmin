@@ -1,5 +1,5 @@
 import PlusIcon from "../../assets/icons/PlusIcon";
-import Naac from "../../assets/images/Mask group.png";
+import Naac from "../../assets/images/dashboardalt.png";
 import CreatePanelModal from "../../components/CreatePanel/CreatePanelModal";
 import { modal } from "../../components/Modal";
 
@@ -26,7 +26,7 @@ const Dashboard = () => {
           </p>
           <p className="text-sub_text text-[13px]">Your Recent Admin Panels</p>
         </div>
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-6">
           {panels.map((panel, index) => (
             <div
               key={`panel_${index}`}
