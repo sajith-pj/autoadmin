@@ -15,6 +15,7 @@ import ClientPage from "./Pages/ClientPanel/ClientPage";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import "./assets/css/table.scss"
 
 config(axiosConfig);
 function App() {

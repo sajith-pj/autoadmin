@@ -1,8 +1,9 @@
 import { useState } from "react";
 
+
 const Table = ({ header, rows }) => {
   const getTd = (key, row) => {
-    let tableheader = header.find((header) => header === key);
+    let tableheader = header.find((header) => header.header === key);
 
     if (typeof tableheader.render == "function") {
       return tableheader.render(row);
@@ -14,8 +15,8 @@ const Table = ({ header, rows }) => {
     let newRow = {};
     header.forEach((head) => {
       let rowKeys = Object.keys(row);
-      if (rowKeys.includes(head)) {
-        newRow[head] = row[head];
+      if (rowKeys.includes(head.header)) {
+        newRow[head.header] = row[head.header];
       }
     });
     return newRow;
@@ -25,7 +26,7 @@ const Table = ({ header, rows }) => {
       <thead>
         <tr>
           {header.map((header, key) => (
-            <th key={key}>{header}</th>
+            <th key={key}>{header.header}</th>
           ))}
         </tr>
       </thead>
