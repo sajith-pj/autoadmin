@@ -30,9 +30,18 @@ const Page = () => {
     ];
   return (
     <div>
-      <h1 className="text-primary text-xl font-semibold font-oswald">
-        Create Your Page
-      </h1>
+      <div className="flex  items-start justify-between ">
+        <div>
+          <h1 className=" text-xl font-semibold ">Your Pages Are Here !!</h1>
+          <p className="text-[10px] text-border_color">
+            Pages of Selected Panel
+          </p>
+        </div>
+        <div>
+          <button className="text-white bg-primary_btn p-[7px] flex items-center justify-center rounded-md text-[12px]">Create New Page</button>
+        </div>
+      </div>
+
       <div className="mt-4">
         <Table header={tableHeader} rows={tableRows} />
       </div>
