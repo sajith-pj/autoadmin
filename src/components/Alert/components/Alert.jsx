@@ -52,8 +52,8 @@ const Alert = ({
       <AlertOverlay onClick={closingOnClick} />
       <AlertLayout onClose={closingOnClick}>
         <AlertIcon type={type} width={100} />
-        <div className="center flex-col">
-          <div className="w-full center flex-col">
+        <div className="flex justify-center items-center flex-col">
+          <div className="w-full flex justify-center items-center flex-col">
             <h1 className="text-[24px] font-extrabold  r-text-dark tracking-wide">
               {title}
             </h1>
@@ -63,7 +63,21 @@ const Alert = ({
           </div>
         </div>
         {typeof subContent !== "undefined" && <div>{subContent()}</div>}
-        <div className="center my-[16px] gap-4">
+        <div className="flex justify-center items-center my-[16px] gap-4">
+        {cancelButton?.show && (
+            <div>
+              <button
+                type="button"
+                className={classNames(
+                  "rounded-[10px]",
+                  cancelButton?.className
+                )}
+                onClick={onCancelButtonClick}
+              >
+                {cancelButton?.displayText}
+              </button>
+            </div>
+          )}
           {successButton?.show && (
             <div>
               <button
@@ -78,20 +92,7 @@ const Alert = ({
               </button>
             </div>
           )}
-          {cancelButton?.show && (
-            <div>
-              <button
-                type="button"
-                className={classNames(
-                  "rounded-[10px]",
-                  cancelButton?.className
-                )}
-                onClick={onCancelButtonClick}
-              >
-                {cancelButton?.displayText}
-              </button>
-            </div>
-          )}
+        
         </div>
       </AlertLayout>
     </>

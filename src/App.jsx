@@ -9,7 +9,6 @@ import Layout from "./components/Layout";
 import Dashboard from "./Pages/Dashboard";
 import Pages from "./Pages/Pages";
 import { config } from "./components/Form/Form";
-import axiosConfig from "./config/axios";
 import ClientLayout from "./components/ClientLayout";
 import ClientPage from "./Pages/ClientPanel/ClientPage";
 import Register from "./Pages/Register/Register";
@@ -18,8 +17,9 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./assets/css/table.scss";
 import CreateSection from "./Pages/CreateNewSection";
 import { AdminContextProvider } from "./context";
+import { axios } from "./config";
+config({ axios });
 
-config(axiosConfig);
 function App() {
   const router = createBrowserRouter([
     {
@@ -60,6 +60,7 @@ function App() {
       ],
     },
   ]);
+
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENTID}>
       <AdminContextProvider>

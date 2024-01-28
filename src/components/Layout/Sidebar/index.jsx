@@ -62,7 +62,6 @@ const Sidebar = ({ open, cycleOpen }) => {
         </div>
         <ul className="w-full px-5 py-9">
           {items.map((data, index) => {
-            console.log(window.location.pathname == data.link);
             return (
               <li className="mb-4 flex justify-center" key={index}>
                 <button
@@ -89,7 +88,7 @@ const Sidebar = ({ open, cycleOpen }) => {
         {open && (
           <>
             <div
-              className="fixed w-full h-screen bg-black/[0.3]"
+              className="block lg:hidden fixed w-full h-screen bg-black/[0.3] z-[99]"
               onClick={cycleOpen}
             ></div>
             <motion.div
@@ -105,12 +104,18 @@ const Sidebar = ({ open, cycleOpen }) => {
               }}
             >
               {/* <img src="/sigi.png" alt="LOGO" className="w-[130px]" /> */}
-              <div className="flex gap-3 justify-center items-center h-[65px] ">
+              <motion.div
+                initial="closed"
+                animate="open"
+                exit="closed"
+                variants={itemVariants}
+                className="flex gap-3 justify-center items-center h-[65px] "
+              >
                 <DummyLogo width={35} height={35} />
                 <p className="font-bold ">
                   AUTO <span className="text-primary">ADMIN</span>
                 </p>
-              </div>
+              </motion.div>
               <motion.ul
                 className="w-full px-5 py-9"
                 initial="closed"

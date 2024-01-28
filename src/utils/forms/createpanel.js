@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 let createPanelForm = {
   template: [
@@ -26,7 +27,7 @@ let createPanelForm = {
       },
       input: {
         type: "file",
-        name: "panelName",
+        name: "panelLogo",
         id: "panel-logo",
         className: "input",
         placeholder: "Choose youur logo",
@@ -56,7 +57,26 @@ let createPanelForm = {
   },
   validationSchema: {
     panelName: Yup.string().required("Please enter the label for the input"),
-    panelLogo: Yup.string().required("Please select the type for the input"),
+    // panelLogo: Yup.string().required("Please select the type for the input"),
+  },
+  submit: {
+    api: "/panel/new",
+    method: "POST",
+    body: ["panelName", "panelLogo"],
+    onAfterApiSuccess: () => {
+      toast("Admin panel created successfully", {
+        type: "success",
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        onClose: () => (window.location.href = "/"),
+      });
+    },
   },
 };
 export { createPanelForm };

@@ -1,10 +1,9 @@
-
-import Styles from './alert.module.scss';
-import React from 'react'
-import { AnimatePresence, motion } from 'framer-motion';
+import Styles from "./alert.module.scss";
+import React from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import CloseIcon from "../../../assets/icons/Close";
 
 const AlertLayout = ({ children, onClose }) => {
-
   return (
     // <AnimatePresence mode='sync'>
     // <motion.div
@@ -16,15 +15,19 @@ const AlertLayout = ({ children, onClose }) => {
     //   // animate={{ y: 0, opacity: 1 }}
     //   exit={{ y: -1000, opacity: 0 }}
     //   transition={{ duration: 1}}
-    <div className={Styles["layout-container"]}>
-      <div className={`${Styles["layout-wrapper"]} center flex-col`}>
-        <button type="button" className={Styles["close-btn"]} onClick={onClose}> <Close width={20} height={20} /> </button>
+    <div className={`${Styles["layout-container"]} shadow-xl shadow-[#eeeeee]`}>
+      <div
+        className={`${Styles["layout-wrapper"]} flex justify-center items-center flex-col`}
+      >
+        <button type="button" className={Styles["close-btn"]} onClick={onClose}>
+          <CloseIcon width={20} height={20} />{" "}
+        </button>
         {children}
       </div>
     </div>
     ///* </motion.div>
-    // </AnimatePresence> 
-  )
-}
+    // </AnimatePresence>
+  );
+};
 
-export default AlertLayout
+export default AlertLayout;

@@ -1,22 +1,31 @@
 import { createRoot } from "react-dom/client";
 import Alertist from "./components/Alertist";
-
+import { createPortal } from "react-dom";
+let alertRoots = [];
 const alertist = (props) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const portalNode = document.querySelector("#portal");
+  const modalCount = document.querySelectorAll(".alert").length;
+  const portalNode = document.querySelector("#alertl_1");
   if (!portalNode) {
     const div = document.createElement("div");
-    div.id = "portal";
-    document.querySelector("#root")?.appendChild(div);
-  }
-
-  const addedPortalNode = document.querySelector("#portal");
-  if (addedPortalNode) {
-    const root = createRoot(addedPortalNode);
-    root.render(<Alertist {...props} />);
+    div.id = "alert_1";
+    div.className = "alert";
+    document.querySelector("#root")?.append(div);
+    alertRoots.push(createRoot(div));
   } else {
-    console.error(`Error: no node found div with id of portal`);
-    return null;
+    const div = document.createElement("div");
+    div.id = `alert_${modalCount + 1}`;
+    div.className = "alert";
+    document.querySelector("#root")?.append(div);
+    alertRoots.push(createRoot(div));
+  }
+  if (alertRoots.length > 0) {
+    let root = alertRoots.find(
+      (root) => root._internalRoot.containerInfo.id == `alert_${modalCount + 1}`
+    );
+    const addedPortalNode = document.querySelector(`#alert_${modalCount + 1}`);
+    if (addedPortalNode) {
+      root.render(createPortal(<Alertist {...props} />, addedPortalNode));
+    }
   }
 };
 

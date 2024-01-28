@@ -51,6 +51,7 @@ const handleResponse = (error) => {
       successButton: {
         show: true,
         displayText: "Okay",
+        className:"bg-primary_btn px-[17px] py-2 rounded-md text-white text-[12px]",
         onClick: () => handleErrorAlertSuccessClick(status),
       },
       cancelButton: {
@@ -101,6 +102,5 @@ const patch = (api, data, config) => {
   });
 };
 
-const axios = { get, post, patch };
+export const axios = { get, post, patch };
 export { get, post, patch };
-export default axios;
