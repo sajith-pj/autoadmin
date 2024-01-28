@@ -15,8 +15,9 @@ import ClientPage from "./Pages/ClientPanel/ClientPage";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import "./assets/css/table.scss"
+import "./assets/css/table.scss";
 import CreateSection from "./Pages/CreateNewSection";
+import { AdminContextProvider } from "./context";
 
 config(axiosConfig);
 function App() {
@@ -61,8 +62,10 @@ function App() {
   ]);
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENTID}>
-      <ToastContainer />
-      <RouterProvider router={router} />
+      <AdminContextProvider>
+        <ToastContainer />
+        <RouterProvider router={router} />
+      </AdminContextProvider>
     </GoogleOAuthProvider>
   );
 }

@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import DownArrow from "../../../assets/icons/ChevronArrow";
 import MenuIcon from "../../../assets/icons/MenuIcon";
 import Notification from "../../../assets/icons/Notification";
 import ProfileImage from "../../../assets/images/Rectangle 1393.png";
+import { AdminContext } from "../../../context";
 
 const Topbar = ({ cycleOpen }) => {
+  const { profile } = useContext(AdminContext);
+  const [userProfile] = profile;
   return (
     <div className="shadow-sm border-b-[1px] border-primary  border-opacity-10">
       <div className="w-full  flex justify-between items-center gap-4 p-4">
@@ -19,14 +23,14 @@ const Topbar = ({ cycleOpen }) => {
           </div>
           <div>
             <img
-              src={ProfileImage}
+              src={userProfile.photo || ProfileImage}
               alt="profile image"
-              className="w-[30px] h-[40px]"
+              className="w-[30px] h-[40px] rounded-[10px]"
             />
           </div>
           <div className="flex justify-between items-center gap-6">
             <div className="flex flex-col items-start">
-              <h1 className="text-text_color text-[14px]">Musfiq</h1>
+              <h1 className="text-text_color text-[14px]">{userProfile.name}</h1>
               <h1 className="text-border_color text-[13px]">Admin</h1>
             </div>
             <div>

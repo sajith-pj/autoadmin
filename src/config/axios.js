@@ -5,7 +5,7 @@ axiosInstance.interceptors.request.use((config) => {
   config.baseURL = import.meta.env.VITE_API_BASE_URL;
   config.headers = Object.assign(
     {
-      Authorization: `${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     config.headers
   );
