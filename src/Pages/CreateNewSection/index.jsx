@@ -1,6 +1,6 @@
 import React from "react";
 import PlusIcon from "../../assets/icons/PlusIcon";
-import MenuDots from "../../assets/icons/MenuDots";
+import MenuDots from "../../assets/images/Menu (1).png";
 import HeroImage from "../../assets/images/dashboardalt.png";
 import Pencil from "../../assets/icons/Pencil";
 import Trash from "../../assets/icons/Trash";
@@ -8,12 +8,20 @@ import Trash from "../../assets/icons/Trash";
 const CreateSection = () => {
   const CardData = [
     {
-      icon: <MenuDots />,
+      icon: MenuDots,
       image: HeroImage,
       Head: "Hero Section",
       Subhead: "left 6 Right 6",
-      Editicon: <Pencil />,
-      Deleteicon: <Trash />,
+      Editicon: <Pencil width={20} height={20} />,
+      Deleteicon: <Trash width={20} height={20} />,
+    },
+    {
+      icon: MenuDots,
+      image: HeroImage,
+      Head: "Hero Section",
+      Subhead: "left 6 Right 6",
+      Editicon: <Pencil width={20} height={20} />,
+      Deleteicon: <Trash width={20} height={20} />,
     },
   ];
   return (
@@ -92,9 +100,11 @@ const CreateSection = () => {
         </div>
 
         {CardData.map((card, index) => (
-          <div className="w-full flex items-center justify-between" key={index}>
+          <div className="w-full flex items-center justify-between mb-[10px]" key={index}>
             <div className="flex justify-center items-center gap-6">
-              {card.icon}
+              <div>
+              <img src={card.icon} alt="menu icon" className="w-[30px] h-[20px]" />
+              </div>
               <div>
                 <img
                   src={card.image}
@@ -103,13 +113,13 @@ const CreateSection = () => {
                 />
               </div>
               <div className="flex flex-col gap-1 justify-center items-center">
-                <div className="font-semibold text-[17px]">{card.Head}</div>
+                <div className="font-semibold text-[17px] ">{card.Head}</div>
                 <div className="text-border_color text-[13px]">
                   {card.Subhead}
                 </div>
               </div>
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center gap-[35px]">
               {card.Editicon}
              {card.Deleteicon}
             </div>
