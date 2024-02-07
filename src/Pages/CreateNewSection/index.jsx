@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PlusIcon from "../../assets/icons/PlusIcon";
-import MenuDots from "../../assets/icons/MenuDots";
+import MenuDots from "../../assets/images/Menu (1).png";
 import HeroImage from "../../assets/images/dashboardalt.png";
 import Pencil from "../../assets/icons/Pencil";
 import Trash from "../../assets/icons/Trash";
@@ -15,12 +15,20 @@ import AddComponents from "../../components/UiComponents/Pages/AddComponents";
 const CreateSection = () => {
   const CardData = [
     {
-      icon: <MenuDots />,
+      icon: MenuDots,
       image: HeroImage,
       Head: "Hero Section",
       Subhead: "left 6 Right 6",
-      Editicon: <Pencil />,
-      Deleteicon: <Trash />,
+      Editicon: <Pencil width={20} height={20} />,
+      Deleteicon: <Trash width={20} height={20} />,
+    },
+    {
+      icon: MenuDots,
+      image: HeroImage,
+      Head: "Hero Section",
+      Subhead: "left 6 Right 6",
+      Editicon: <Pencil width={20} height={20} />,
+      Deleteicon: <Trash width={20} height={20} />,
     },
   ];
   const [sections, setSections] = useState([

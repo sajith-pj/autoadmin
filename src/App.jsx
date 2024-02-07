@@ -18,6 +18,7 @@ import "./assets/css/table.scss";
 import CreateSection from "./Pages/CreateNewSection";
 import { AdminContextProvider } from "./context";
 import { axios } from "./config";
+import Settings from "./Pages/Settings";
 config({ axios });
 
 function App() {
@@ -46,6 +47,9 @@ function App() {
           path: "/pages/:id",
           element: <CreateSection />,
         },
+        {
+        path:"/settings",
+        element:<Settings/>},
       ],
     },
 
