@@ -40,7 +40,11 @@ const Table = ({
     </tbody>
   );
 
-  const noData = <div className="center w-full min-h-[300px]">No Data</div>;
+  const noData = (
+    <div className="flex justify-center items-center w-full min-h-[300px] text-sub_text">
+      No Data
+    </div>
+  );
   return (
     <div className="mb-4 h-full r-table-responsive min-h-[300px]">
       <table

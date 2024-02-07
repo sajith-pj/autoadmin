@@ -1,5 +1,5 @@
-import Form from "../Form/Form";
-import { createPanelForm } from "../../utils/forms/createpanel";
+import Form from "../../../Form/Form";
+import { createPanelForm } from "../../../../utils/forms/createpanel";
 const CreatePanelModal = () => {
   return (
     <div>

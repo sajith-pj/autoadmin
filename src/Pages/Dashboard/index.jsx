@@ -1,10 +1,22 @@
+import { useContext, useEffect } from "react";
 import PlusIcon from "../../assets/icons/PlusIcon";
 import Naac from "../../assets/images/dashboardalt.png";
-import CreatePanelModal from "../../components/CreatePanel/CreatePanelModal";
 import { modal } from "../../components/Modal";
+import CreatePanelModal from "../../components/UiComponents/Dasboard/CreatePanel/CreatePanelModal";
+import { get } from "../../config";
+import { AdminContext } from "../../context";
 
 const Dashboard = () => {
-  let panels = ["NAAC", "RELIVA GLOBALS", "ADMIN STATION", "PANELIST"];
+  const { panel, profile, panelList } = useContext(AdminContext);
+  const [, setSelectedPanel] = panel;
+  const [userProfile] = profile;
+  const [panels, setPanels] = panelList;
+
+  const fetchPanels = () => {
+    get("/panel/list/").then((response) => {
+      setPanels(response.data.data);
+    });
+  };
   const createAdminPanel = () => {
     modal({
       maxWidth: 600,
@@ -12,12 +24,30 @@ const Dashboard = () => {
       header: {
         heading: `CREATE ADMIN PANEL`,
       },
+      onClose: () => fetchPanels(),
     });
   };
+  const selectPanel = (id) => {
+    let selectedPanelFromList = panels.find((panel) => panel._id === id);
+    setSelectedPanel({
+      label: selectedPanelFromList.name,
+      value: selectedPanelFromList._id,
+    });
+    localStorage.setItem(
+      "lastSelectedPanel",
+      JSON.stringify({
+        label: selectedPanelFromList.name,
+        value: selectedPanelFromList._id,
+      })
+    );
+  };
+  useEffect(() => {
+    fetchPanels();
+  }, []);
   return (
     <div>
       <div className="my-2 pb-1 text-text_color text-[23px] font-semibold">
-        <h1>Welcome Back ! Arjun</h1>
+        <h1>Welcome Back ! {userProfile?.name}</h1>
       </div>
       <div className=" bg-white rounded-[16px] shadow-md shadow-[#eeeeee]  p-[25px] w-full ">
         <div className="flex flex-col justify-start items-start mb-4 ">
@@ -27,18 +57,20 @@ const Dashboard = () => {
           <p className="text-sub_text text-[13px]">Your Recent Admin Panels</p>
         </div>
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-6">
-          {panels.map((panel, index) => (
+          {panels.map(({ name, logo, _id }, index) => (
             <div
+              role="button"
               key={`panel_${index}`}
-              className="w-full max-w-[230px] h-[160px] border border-border_color/[0.32] rounded-lg shadow-md relative overflow-hidden "
+              className="w-full max-w-[230px] h-[160px] border border-border_color/[0.32] rounded-lg shadow-md relative overflow-hidden cursor-pointer"
+              onClick={() => selectPanel(_id)}
             >
-              <div className=" bg-gradient-to-b from-white w-full absolute top-0 left-0 z-10 px-3 py-2">
-                <h1 className="text-text_color font-semibold text-[14px]  ">
-                  {panel}
+              <div className=" bg-gradient-to-b from-white w-full absolute top-0 left-0  px-3 py-2">
+                <h1 className="text-text_color font-semibold text-[14px] uppercase ">
+                  {name}
                 </h1>
               </div>
               <img
-                src={Naac}
+                src={logo || Naac}
                 alt="Naac dashboard"
                 className="w-[100%] h-[100%]  "
               />

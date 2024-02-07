@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 let alertRoots = [];
 const alertist = (props) => {
   const modalCount = document.querySelectorAll(".alert").length;
-  const portalNode = document.querySelector("#alertl_1");
+  const portalNode = document.querySelector("#alert_1");
   if (!portalNode) {
     const div = document.createElement("div");
     div.id = "alert_1";
@@ -24,7 +24,7 @@ const alertist = (props) => {
     );
     const addedPortalNode = document.querySelector(`#alert_${modalCount + 1}`);
     if (addedPortalNode) {
-      root.render(createPortal(<Alertist {...props} />, addedPortalNode));
+      root.render(createPortal(<Alertist {...props} addedPortalNode={addedPortalNode} alertRoots={alertRoots} />, addedPortalNode));
     }
   }
 };

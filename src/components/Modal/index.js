@@ -1,10 +1,13 @@
 import { createRoot } from "react-dom/client";
 import Modal from "./components/Modal";
 import { createPortal } from "react-dom";
+import { AdminContextProvider } from "../../context";
 let modalRoots = [];
+var onClose = () => {};
 const modal = (props) => {
   const modalCount = document.querySelectorAll(".modal").length;
   const portalNode = document.querySelector("#modal_1");
+  if (props.onClose) onClose = props.onClose;
   if (!portalNode) {
     const div = document.createElement("div");
     div.id = "modal_1";
@@ -26,11 +29,13 @@ const modal = (props) => {
     if (addedPortalNode) {
       root.render(
         createPortal(
-          <Modal
-            {...props}
-            addedPortalNode={addedPortalNode}
-            modalRoots={modalRoots}
-          />,
+          <AdminContextProvider>
+            <Modal
+              {...props}
+              addedPortalNode={addedPortalNode}
+              modalRoots={modalRoots}
+            />
+          </AdminContextProvider>,
           addedPortalNode
         )
       );
@@ -39,6 +44,7 @@ const modal = (props) => {
 };
 
 const closeModal = () => {
+  onClose();
   modalRoots[modalRoots.length - 1].unmount();
   modalRoots.pop();
 };

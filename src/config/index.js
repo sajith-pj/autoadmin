@@ -32,6 +32,7 @@ const handleResponse = (error) => {
       successButton: {
         show: true,
         displayText: "Okay",
+        className: "bg-primary text-white px-4 py-2 rounded-lg text-[14px]",
         onClick: () => handleErrorAlertSuccessClick(status),
       },
       cancelButton: {
@@ -51,7 +52,8 @@ const handleResponse = (error) => {
       successButton: {
         show: true,
         displayText: "Okay",
-        className:"bg-primary_btn px-[17px] py-2 rounded-md text-white text-[12px]",
+        className:
+          "bg-primary_btn px-[17px] py-2 rounded-md text-white text-[12px]",
         onClick: () => handleErrorAlertSuccessClick(status),
       },
       cancelButton: {

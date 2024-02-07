@@ -7,15 +7,22 @@ import Trash from "../../assets/icons/Trash";
 import PlayIcon from "../../assets/icons/PlayIcon";
 import { modal } from "../../components/Modal";
 import NewPageModal from "../../components/UiComponents/Pages/NewPageModal";
-
+import { get } from "../../config";
+import { useContext, useEffect, useState } from "react";
+import moment from "moment";
+import { AdminContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 const Page = () => {
-
+  const navigate = useNavigate();
+  const { panel } = useContext(AdminContext);
+  const [selectedPanel] = panel;
   let headers = [
     {
       Header: "No",
       accessor: "no",
       className: "w-[7%]",
+      Cell: (data) => data.row.index + 1,
     },
     {
       Header: "",
@@ -28,17 +35,28 @@ const Page = () => {
       ),
     },
     {
-      Header: "Name",
-      accessor: "name",
+      Header: "Label",
+      accessor: "label",
     },
     {
       Header: "Path",
       accessor: "path",
     },
     {
+      Header: "Updated at",
+      accessor: "updatedAt",
+      Cell: (data) => {
+        return (
+          <span>
+            {moment(data.row.original.updatedAt).startOf("day").fromNow()}
+          </span>
+        );
+      },
+    },
+    {
       Header: "",
       accessor: "ac",
-      Cell: () => (
+      Cell: (data) => (
         <div className="flex  items-center">
           <Dropdown
             button={{
@@ -57,13 +75,20 @@ const Page = () => {
                 icon: (
                   <Pencil width="15" className="mr-3 stroke-border_color" />
                 ),
+                onClick: () => navigate(`/pages/${data.row.original._id}`),
                 className:
                   "w-full flex items-center border-b-[1px] border-border_color/[0.32] text-text_color",
               },
               {
                 name: "Delete",
                 value: 10,
-                icon: <Trash width="15" height="15" className="mr-3 fill-border_color " />,
+                icon: (
+                  <Trash
+                    width="15"
+                    height="15"
+                    className="mr-3 fill-border_color "
+                  />
+                ),
                 className: "w-full flex items-center text-text_color",
               },
             ]}
@@ -76,45 +101,27 @@ const Page = () => {
       ),
     },
   ];
-  let tableData = [
-    {
-      no: "1",
-      name: "Dashboard",
-      path: "/",
-    },
-    {
-      no: "2",
-      name: "Products",
-      path: "/products",
-    },
-    {
-      no: "3",
-      name: "Add Products",
-      path: "/add-products",
-    },
-    {
-      no: "4",
-      name: "Add Products",
-      path: "/add-products",
-    },
-    {
-      no: "4",
-      name: "Add Products",
-      path: "/add-products",
-    },
-  ];
-  
-  const createNewPage = ()=>{
-  modal({header:{
-  heading:"CREATE NEW PAGE"
-  },
-  component:<NewPageModal />
-  
-  })
- 
-    }
 
+  const [pages, setPages] = useState([]);
+  const fetchPages = () => {
+    get(`/pages/list/${selectedPanel.value}`).then((response) =>
+      setPages(response.data.data)
+    );
+  };
+  const createNewPage = () => {
+    modal({
+      header: {
+        heading: "CREATE NEW PAGE",
+      },
+      component: <NewPageModal selectedPanel={selectedPanel.value} />,
+      onClose: () => fetchPages(),
+    });
+  };
 
+  useEffect(() => {
+    if (selectedPanel && selectedPanel.value && selectedPanel.value !== "")
+      fetchPages();
+  }, [selectedPanel.value]);
   return (
     <div>
       <div className="flex justify-between items-end">
@@ -124,20 +131,24 @@ const Page = () => {
           </h1>
           <p className="text-sub_text">Pages of selected panel</p>
         </div>
-        <div>
-          <button
-            type="button"
-            className="bg-primary px-4 py-2 text-white rounded-[4px] text-sm"
-           onClick={createNewPage}
-          >
-            Create New Page
-          </button>
-        </div>
       </div>
       <div>
         <DataTable
-          columnDef={{ tableHeaders: headers }}
-          tableData={tableData}
+          columnDef={{
+            tableHeaders: headers,
+            panelActionButtons: {
+              containerClassName: "w-full flex justify-end",
+              items: [
+                {
+                  displayText: "Create New Page",
+                  className:
+                    "bg-primary px-4 py-2 text-white rounded-[4px] text-sm",
+                  onClick: createNewPage,
+                },
+              ],
+            },
+          }}
+          tableData={pages}
           className="r-table bordered"
           search={false}
           title="Pages"

@@ -15,11 +15,15 @@ const Alert = ({
   cancelButton,
   timer,
   onClose,
+  alertRoots,
+  addedPortalNode,
 }) => {
   const closeAlert = () => {
+    console.log(alertRoots);
     if (onClose) onClose();
     document.body.style.overflow = "auto";
-    setShow(!show);
+    alertRoots.pop();
+    addedPortalNode?.remove();
   };
   const autoCloseAfterTimer = () => {
     setTimeout(() => closeAlert(), timer);
@@ -57,14 +61,14 @@ const Alert = ({
             <h1 className="text-[24px] font-extrabold  r-text-dark tracking-wide">
               {title}
             </h1>
-            <p className="font-semibold  r-text-ash tracking-wide text-center">
+            <p className="text-sub_text tracking-wide text-center">
               {subtitle}
             </p>
           </div>
         </div>
         {typeof subContent !== "undefined" && <div>{subContent()}</div>}
         <div className="flex justify-center items-center my-[16px] gap-4">
-        {cancelButton?.show && (
+          {cancelButton?.show && (
             <div>
               <button
                 type="button"
@@ -92,7 +96,6 @@ const Alert = ({
               </button>
             </div>
           )}
-        
         </div>
       </AlertLayout>
     </>

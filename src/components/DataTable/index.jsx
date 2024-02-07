@@ -10,7 +10,7 @@ import TableDropdown from "./TableDropdown";
 const DataTable = ({
   columnDef = {
     tableHeaders: [],
-    panelActionButtons: { activeClassname: "", items: [] },
+    panelActionButtons: { containerClassName, activeClassname: "", items: [] },
     filterOptions: { options: [] },
   },
   tableData = [],
@@ -32,9 +32,6 @@ const DataTable = ({
     headerGroups,
     prepareRow,
     page, // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-
-    // The rest of these things are super handy, too ;)
     canPreviousPage,
     canNextPage,
     pageCount,
@@ -43,6 +40,7 @@ const DataTable = ({
     previousPage,
     setPageSize,
     setGlobalFilter,
+    pageOptions,
     state: { pageIndex, globalFilter },
   } = useTable(
     {
@@ -63,19 +61,29 @@ const DataTable = ({
     onTableRowClick,
   };
 
+  console.log(pageOptions);
   // Render the UI for your table
   return (
     <>
-      <div className="mb-4 flex items-center justify-between">
-        <div className="flex overflow-auto">
+      <div
+        className={`mb-4 w-full flex items-center ${
+          columnDef?.filterOptions && columnDef.panelActionButton
+            ? "justify-between"
+            : "justify-end"
+        } justify-end`}
+      >
+        <div className={columnDef?.panelActionButtons.containerClassName}>
           <PanelActionButton buttons={columnDef?.panelActionButtons?.items} />
         </div>
-        <div className="flex justify-center items-center ">
-          <div className="mr-3"></div>
-          <div>
-            <DropFilter {...columnDef?.filterOptions} />
+
+        {columnDef?.filterOptions && columnDef?.filterOptions?.length > 0 && (
+          <div className="flex justify-center items-center ">
+            <div className="mr-3"></div>
+            <div>
+              <DropFilter {...columnDef?.filterOptions} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {tableHead !== undefined && <div>{tableHead()}</div>}
@@ -105,20 +113,23 @@ const DataTable = ({
         {pagination && page.length > 0 && (
           <div className="paginations mt-4 px-4">
             <TableDropdown
-              buttonClassName="text-white px-4 py-2 rounded-[10px] bg-[#F9F9F9]/30"
-              optionsContainerClassName="top-[40px] left-0 bg-"
+              buttonClassName="bg-primary text-white px-4 py-2 rounded-[10px]"
+              optionsContainerClassName="top-[40px] left-0 flex flex-col bg-white w-full shadow-md shadow-[#eeeeee]"
               optionsList={[
                 {
                   name: "10",
                   value: 10,
+                  className: "text-sm",
                 },
                 {
                   name: "20",
                   value: 20,
+                  className: "text-sm",
                 },
                 {
                   name: "30",
                   value: 30,
+                  className: "text-sm",
                 },
               ]}
               onClick={({ value }) => {
@@ -127,10 +138,7 @@ const DataTable = ({
             />
 
             <DataTablePagination
-              pageCount={pageCount}
-              pageIndex={pageIndex}
-              canPreviousPage={canPreviousPage}
-              canNextPage={canNextPage}
+              pageOptions={pageOptions}
               nextPage={nextPage}
               previousPage={previousPage}
               gotoPage={gotoPage}

@@ -1,4 +1,3 @@
-"use client";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -32,7 +31,7 @@ const Layout = () => {
       <Sidebar open={open} cycleOpen={cycleOpen} />
       <div className="w-full h-full overflow-hidden">
         <Topbar cycleOpen={cycleOpen} />
-        <div className="p-8 w-full h-[91%] overflow-auto bg-secondary_bg">
+        <div className="px-8 pt-8 pb-[150px] w-full h-[91%] overflow-auto bg-secondary_bg">
           <Outlet />
         </div>
       </div>

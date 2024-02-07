@@ -4,7 +4,7 @@ import { removeAttribute } from "../utils/commonFunction";
 import Styles from "../form.module.scss";
 import classNames from "classnames";
 const Textarea = ({ templateInput, errors, values, handleChange, touched }) => {
-  const { container, input, label } = templateInput;
+  const { container, input, label, caption } = templateInput;
 
   return (
     <div
@@ -54,6 +54,9 @@ const Textarea = ({ templateInput, errors, values, handleChange, touched }) => {
             : Styles["input"]
         )}
       />
+      {caption && caption.text !== "" && (
+        <span {...caption}>{caption.text}</span>
+      )}
       {touched[`${input?.name}`] &&
         errors !== undefined &&
         errors[`${input?.name}`] && (

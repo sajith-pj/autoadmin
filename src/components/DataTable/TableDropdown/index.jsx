@@ -38,7 +38,7 @@ const TableDropdown = ({
               : optionsList[0]?.name}{" "}
           </span>
           <span className="ml-4">
-            <ChevronArrow />
+            <ChevronArrow className="fill-none stroke-white" />
           </span>
         </button>
         {isOpen && (
@@ -49,7 +49,7 @@ const TableDropdown = ({
             ></div>
             <div
               className={classNames(
-                "absolute z-[51] rounded-[10px] py-5 px-2",
+                "absolute z-[51] rounded-[10px]  p-2",
                 optionsContainerClassName
               )}
             >
@@ -58,9 +58,8 @@ const TableDropdown = ({
                   type="button"
                   key={index}
                   className={classNames(
-                    "pointer rounded-[10px]  px-13 py-2 hover:bg-[#ffffff74]",
-                    option?.className,
-                    index !== optionsList.length - 1 && "mb-4"
+                    "pointer rounded-[10px]  py-2 hover:bg-[#ffffff74] ",
+                    option?.className
                   )}
                   value={option?.value}
                   onClick={() =>

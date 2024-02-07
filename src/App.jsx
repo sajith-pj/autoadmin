@@ -43,7 +43,7 @@ function App() {
           element: <Pages />,
         },
         {
-          path: "/pages/new",
+          path: "/pages/:id",
           element: <CreateSection />,
         },
       ],

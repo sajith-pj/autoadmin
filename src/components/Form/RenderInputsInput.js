@@ -37,7 +37,13 @@ export const RenderInputs = ({
             </Fragment>
           );
         } else {
-          const { input } = templateInput;
+          const input =
+            typeof templateInput.input === "function"
+              ? templateInput.input({
+                  values,
+                  label: templateInput.label,
+                })
+              : templateInput.input;
           inputProps.templateInput = templateInput;
           if (TEXT_FIELDS.includes(`${input?.type}`)) {
             return <TextInputs key={index} {...inputProps} />;

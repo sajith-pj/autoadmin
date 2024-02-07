@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { closeModal } from "../../components/Modal";
 let createPanelForm = {
   template: [
     {
@@ -60,11 +61,11 @@ let createPanelForm = {
     // panelLogo: Yup.string().required("Please select the type for the input"),
   },
   submit: {
-    api: "/panel/new",
+    api: "/panel/list",
     method: "POST",
     body: ["panelName", "panelLogo"],
     onAfterApiSuccess: () => {
-      toast("Admin panel created successfully", {
+      toast("Panel created successfully", {
         type: "success",
         position: "top-right",
         autoClose: 3000,
@@ -74,7 +75,7 @@ let createPanelForm = {
         draggable: true,
         progress: undefined,
         theme: "light",
-        onClose: () => (window.location.href = "/"),
+        onClose: () => closeModal(),
       });
     },
   },
