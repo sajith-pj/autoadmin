@@ -1,43 +1,19 @@
-import { Tabs, Tab } from "@mui/material";
-import { data } from "autoprefixer";
-import { useState } from "react";
+import React from "react";
+import Tab from "../../components/Tab";
 
-const Settings = () => {
-const [value,setValue] = useState(0)
-  const handletabs=(e,value)=>{
-console.log(value);
-console.log(e);
-setValue(value)
-  }
-
-
+const TabComponent = () => {
+  const tabs = [
+    { title: "Tab 1", content: <div>Styles</div> },
+    { title: "Tab 2", content: <div>Api </div> },
+  ];
   return (
     <div>
-  
-      <Tabs value={value} className="w-[400px]" onChange={handletabs}>
-       <Tab label="Setting"/>
-       <Tab label="Api"/>
-      </Tabs>
-      <TabPanel value={value} index={0}>Styles</TabPanel>
-      <TabPanel value={value} index={1}>Api Page</TabPanel>
+      <div className="mb-[10px]">
+        <h1 className="text-text_color text-[30px] font-semibold ">Settings</h1>
+      </div>
+      <Tab tabs={tabs} />
     </div>
   );
 };
 
-const TabPanel=(props)=>{
-  const {children,value,index} = props
-  {
-    return(
-    <div>
-      {
-        value ===index&&(
-          <h1>{children}</h1>
-        )
-      }
-
-    </div>
-  )
-}
-}
-
-export default Settings;
+export default TabComponent;
