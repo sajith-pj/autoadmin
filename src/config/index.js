@@ -40,7 +40,7 @@ const handleResponse = (error) => {
       },
     });
   } else if (status === 401) {
-    // window.location ='/signin'
+    window.location ='/signin'
   }
 
   if (successStatusCode.includes(status)) {
