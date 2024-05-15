@@ -116,7 +116,7 @@ const Topbar = ({ cycleOpen }) => {
                       "w-full flex items-center text-sub_text py-4 px-4",
                     onClick: () => {
                       localStorage.removeItem("token");
-                      navigate("/signin");
+                      navigate("/login");
                     },
                   },
                 ]}
